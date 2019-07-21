@@ -12,13 +12,16 @@ import openpyxl
 import csv
 import shutil
 
+# create the csvFiles folder for the converted files
 csvFiles = os.path.join(".", "csvFiles")
 if os.path.exists(csvFiles):
     shutil.rmtree(csvFiles)
 os.mkdir(csvFiles)
 
+# create the path for the excel files in the excelSpreadsheets folder
 excelFiles = os.path.join(".", "excelSpreadsheets")
 
+# Loop through each excel file in the folder and convert each excel sheet to its own csv file
 for excelFile in os.listdir(excelFiles):
     if not excelFile.endswith('.xlsx'):
         continue
@@ -30,10 +33,12 @@ for excelFile in os.listdir(excelFiles):
 
         # Create the CSV filename from the excel filename and sheet title.
         csvFile = str(excelFile)[:-5] + '_' + sheet.title + ".csv"
+
         # Create the csv.writer object for this CSV file.
         csvFilename = open(os.path.join(csvFiles, csvFile), 'w', newline='')
         csvFileWriter = csv.writer(csvFilename)
-        #Loop through every row in the sheet.
+
+        # Loop through every row in the sheet.
         for rowNum in range(1, sheet.max_row + 1):
             # append each cell to this list
             rowData = []

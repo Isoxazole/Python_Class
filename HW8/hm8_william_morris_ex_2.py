@@ -12,17 +12,19 @@ import os
 import PyPDF2
 import time
 
+# Define the file to unencrypt
 fileName = "encrypted.pdf"
 
+# Open pdf
 pdfFileObj = open(fileName, 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
 
-os.path.join(".", fileName)
-
 # start timer
 start = time.time()
 
+# Loop through text file of words and try each one as lower and upper case
+# If password is found, break loop
 with open("dictionary.txt") as file:
     for word in file.readlines():
         word = word[:-1]
@@ -34,4 +36,5 @@ with open("dictionary.txt") as file:
             break
 end = time.time()
 
+#print time to find password
 print("Total time to find password: %s" % str(end - start))
